@@ -5,7 +5,10 @@
 #pragma warning (disable: 4996 6031 6011 6386)
 #define SEPARATOR printf("--------------------------------------------------------------------------\n")
 
+
 const char ACCEPTABLE_VALUES[] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '\0' };
+
+
 
 int main(void)
 {
@@ -43,11 +46,22 @@ int main(void)
 	system("pause");
 	system("cls");
 
+	//INITIALIZATION OF MATRIX STRUCTURE
 	int** matrix = createMatrixArray(matrixSize);
-	DebugPrintM(matrix, matrixSize);
+	int** mirrorMatrix = createMatrixArray(matrixSize);
+	MATRIX_CURSOR cursor = { .X = -1, .Y = -1 };
+	/////////////////////////////////////////
+	
+	//DebugPrintM(matrix, matrixSize);
+	//DebugPrintM(mirrorMatrix, matrixSize);
+	
+	PrintMatrix(matrix, matrixSize, &cursor, mirrorMatrix);
+	
+
 
 
 	deleteMatrixArray(matrix, matrixSize);
+	deleteMatrixArray(mirrorMatrix, matrixSize);
 	return 0;
 }
 
@@ -80,6 +94,7 @@ int** createMatrixArray(unsigned int a_size)
 
 }
 
+//Handle memory clearing
 void deleteMatrixArray(int** t_array, unsigned int size)
 {
 	for (unsigned int i = 0; i < size; i++)
@@ -87,4 +102,9 @@ void deleteMatrixArray(int** t_array, unsigned int size)
 		free(t_array[i]);
 	}
 	free(t_array);
+}
+
+void PrintMatrix(int** matrix, unsigned int matrix_size, MATRIX_CURSOR *currCursor, int** mirrorMatrix)
+{
+	printf("The X value is %d and the Y value is %d", currCursor->X, currCursor->Y);
 }
