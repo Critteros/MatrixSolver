@@ -150,6 +150,7 @@
     <ClCompile Include="src\MatrixSolver.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\MatrixDebugPrint.h" />
     <ClInclude Include="src\MatrixSolver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
