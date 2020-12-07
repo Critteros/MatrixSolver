@@ -15,7 +15,7 @@ void createEmptyStack(POINTER_STACK* stack)
 
 void put(POINTER_STACK* stack, DELETE_STRUCTURE* structure)
 {
-	if (stack->top == stack->realSize)
+	if (stack->size == stack->realSize)
 		resize(stack);
 	
 	stack->structure_array[stack->size] = structure;

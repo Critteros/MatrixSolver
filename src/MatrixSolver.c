@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include "MatrixSolver.h"
 #include "PointerCallStack.h"
+#include "MatrixDeterminent.h"
 
 
-
+POINTER_STACK queque;
 
 const char ACCEPTABLE_VALUES[] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '\0' };
 
@@ -12,6 +13,7 @@ const char ACCEPTABLE_VALUES[] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', 
 
 int main(void)
 {
+	createEmptyStack(&queque);
 	int matrixSizeInput;
 
 	printf("Enter matrix size: ");
@@ -56,23 +58,17 @@ int main(void)
 	//DebugPrintM(matrix, matrixSize);
 	//DebugPrintM(mirrorMatrix, matrixSize);
 
-	//MatrixEnter(matrix, matrixSize, &cursor, mirrorMatrix);
-	//PrintMatrix(matrix, matrixSize, &cursor, mirrorMatrix);
-
-	POINTER_STACK queque;
-	createEmptyStack(&queque);
+	MatrixEnter(matrix, matrixSize, &cursor, mirrorMatrix);
+	PrintMatrix(matrix, matrixSize, &cursor, mirrorMatrix);
 	
+	int** slicedMatrix = sliceMatrix(matrix, matrixSize, 1);
+	DebugPrintM(slicedMatrix, matrixSize - 1);
+
 	
-	DELETE_STRUCTURE* matrixDelete = createDeleteStructure(matrix, matrixSize);
-	DELETE_STRUCTURE* mirrorMatrixDelete = createDeleteStructure(mirrorMatrix, matrixSize);
-	put(&queque, matrixDelete);
-	put(&queque, mirrorMatrixDelete);
-
-
-
+	system("pause");
+	system("cls");
 	freeMemory(&queque);
 	
-
 	return 0;
 }
 
@@ -101,6 +97,9 @@ int** createMatrixArray(unsigned int a_size)
 		return_array[i] = tmppointer;
 		tmppointer = NULL;
 	}
+	DELETE_STRUCTURE* deleter = createDeleteStructure(return_array, a_size);
+	put(&queque, deleter);
+	
 	return return_array;
 
 }

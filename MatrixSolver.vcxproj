@@ -147,11 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\MatrixDeterminent.c" />
     <ClCompile Include="src\MatrixEnter.c" />
     <ClCompile Include="src\MatrixSolver.c" />
     <ClCompile Include="src\PointerCallStack.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\MatrixDeterminent.h" />
     <ClInclude Include="src\MatrixSolver.h" />
     <ClInclude Include="src\PointerCallStack.h" />
   </ItemGroup>
