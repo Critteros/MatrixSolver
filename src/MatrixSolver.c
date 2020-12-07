@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "MatrixSolver.h"
-#include "MatrixDebugPrint.h"
-#pragma warning (disable: 4996 6031 6011 6386)
-#define SEPARATOR printf("--------------------------------------------------------------------------\n")
+
+
 
 
 const char ACCEPTABLE_VALUES[] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '\0' };
@@ -52,12 +51,15 @@ int main(void)
 	MATRIX_CURSOR cursor = { .Y = 1, .X = 1};
 	/////////////////////////////////////////
 	
+
 	//DebugPrintM(matrix, matrixSize);
 	//DebugPrintM(mirrorMatrix, matrixSize);
-	
+
+	MatrixEnter(matrix, matrixSize, &cursor, mirrorMatrix);
 	PrintMatrix(matrix, matrixSize, &cursor, mirrorMatrix);
 	
-
+	
+	
 
 
 	deleteMatrixArray(matrix, matrixSize);
@@ -118,8 +120,8 @@ void PrintMatrix(int** matrix, unsigned int matrix_size, MATRIX_CURSOR *Cursor, 
 	printf("\n");
 	
 	//Handling indywidual elements of an array
-	int realElement = NULL;
-	int mirrorElement = NULL;
+	int realElement;
+	int mirrorElement;
 	/////////////////////////
 	
 	for (unsigned int row = 0; row < matrix_size; row++)
@@ -169,15 +171,31 @@ void PrintMatrix(int** matrix, unsigned int matrix_size, MATRIX_CURSOR *Cursor, 
 			currX++;
 		} //END OF EACH ELEMENT LOOP
 		printf("|\n");
-		realElement = NULL;
-		mirrorElement = NULL;
 
 		currY++;
 		currX = 1;
 	}
 }
 
-void MatrixEnter(int** matrix, unsigned int matrix_size, MATRIX_CURSOR* Cursor, int** mirrorMatrix)
+void DebugPrintM(int** t_array, unsigned int t_size)
 {
+	printf("-----------DEBUG_PRINT-----------\n\n");
+	//Iterate over rows
+	int* currRow = NULL;
+	for (unsigned int row = 0; row < t_size; row++)
+	{
+		currRow = t_array[row];
+		printf("| [");
+		//Iterate over elements
+		for (unsigned int element = 0; element < (t_size - 1); element++)
+		{
+			printf("%d, ", currRow[element]);
+		}
+		printf("%d", currRow[t_size - 1]);
+		printf("] |\n");
+		currRow = NULL;
+	}
+	printf("\n-----------DEBUG_PRINT-----------\n\n");
 
 }
+
