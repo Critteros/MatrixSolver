@@ -61,12 +61,10 @@ int main(void)
 	MatrixEnter(matrix, matrixSize, &cursor, mirrorMatrix);
 	PrintMatrix(matrix, matrixSize, &cursor, mirrorMatrix);
 	
-	int** slicedMatrix = sliceMatrix(matrix, matrixSize, 1);
-	DebugPrintM(slicedMatrix, matrixSize - 1);
+	int result = calculateDeterminent(matrix, matrixSize);
+	printf("\nDeterminant is equal [%d]\n", result);
 
 	
-	system("pause");
-	system("cls");
 	freeMemory(&queque);
 	
 	return 0;

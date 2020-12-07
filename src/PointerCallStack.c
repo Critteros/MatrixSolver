@@ -75,7 +75,7 @@ void freeMemory(POINTER_STACK* ref)
 	while (!isEmpty(ref))
 	{
 		DELETE_STRUCTURE* currElement = pop(ref);
-		printf("Popped \n");
+		//printf("Popped \n");
 		deleteMatrixArray(currElement->pointers_array, currElement->size);
 		free(currElement);
 	}
