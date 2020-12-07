@@ -61,16 +61,17 @@ int main(void)
 
 	POINTER_STACK queque;
 	createEmptyStack(&queque);
-	put(&queque, matrix);
-	int** tmp = pop(&queque);
-	printf("Matrix adress [%p]\n", matrix);
-	printf("Queque adress [%p]\n", tmp);
 	
+	
+	DELETE_STRUCTURE* matrixDelete = createDeleteStructure(matrix, matrixSize);
+	DELETE_STRUCTURE* mirrorMatrixDelete = createDeleteStructure(mirrorMatrix, matrixSize);
+	put(&queque, matrixDelete);
+	put(&queque, mirrorMatrixDelete);
 
 
 
-	deleteMatrixArray(matrix, matrixSize);
-	deleteMatrixArray(mirrorMatrix, matrixSize);
+	freeMemory(&queque);
+	
 
 	return 0;
 }
