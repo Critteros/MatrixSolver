@@ -49,7 +49,7 @@ int main(void)
 	//INITIALIZATION OF MATRIX STRUCTURE
 	int** matrix = createMatrixArray(matrixSize);
 	int** mirrorMatrix = createMatrixArray(matrixSize);
-	MATRIX_CURSOR cursor = { .X = -1, .Y = -1 };
+	MATRIX_CURSOR cursor = { .Y = 1, .X = 1};
 	/////////////////////////////////////////
 	
 	//DebugPrintM(matrix, matrixSize);
@@ -104,7 +104,80 @@ void deleteMatrixArray(int** t_array, unsigned int size)
 	free(t_array);
 }
 
-void PrintMatrix(int** matrix, unsigned int matrix_size, MATRIX_CURSOR *currCursor, int** mirrorMatrix)
+void PrintMatrix(int** matrix, unsigned int matrix_size, MATRIX_CURSOR *Cursor, int** mirrorMatrix)
 {
-	printf("The X value is %d and the Y value is %d", currCursor->X, currCursor->Y);
+	system("cls"); //Cleaning the screen
+	//Main loop that will handle each row of matrix
+
+	char rectangle = 219;
+
+	int currX = 1;
+	int currY = 1;
+
+	//Skip one line
+	printf("\n");
+	
+	//Handling indywidual elements of an array
+	int realElement = NULL;
+	int mirrorElement = NULL;
+	/////////////////////////
+	
+	for (unsigned int row = 0; row < matrix_size; row++)
+	{
+		printf(" | ");
+		
+		//Main loop that will handle each row-column
+		for (unsigned int element = 0; element < matrix_size; element++)
+		{
+			realElement = matrix[row][element];
+			mirrorElement = mirrorMatrix[row][element];
+			//For each element in each row-collumn check with mirrorMatrix
+			//If mirror matrix value is 1 for a given element then
+			//It is taken as an user-written value
+			//else if mirrorMatrix value is 0 for a given element
+			//it is taken as an to write value
+			if (mirrorElement == 1)
+			{
+				if ((currX == Cursor->X) && (currY == Cursor->Y))
+				{
+					printf("%c ", rectangle);
+				}
+				else
+				{
+					printf("%d ", realElement);
+				}
+				
+			}
+			else if (mirrorElement == 0)
+			{
+				if ((currX == Cursor->X) && (currY == Cursor->Y))
+				{
+					printf("%c ", rectangle);
+				}
+				else
+				{
+					printf("# ");
+				}
+				
+				
+			}
+			else
+			{
+				printf("ERROR: mirror element was not 0 or 1 mirrorElement=[%d]", mirrorElement);
+				exit(1);
+			}
+			currX++;
+		} //END OF EACH ELEMENT LOOP
+		printf("|\n");
+		realElement = NULL;
+		mirrorElement = NULL;
+
+		currY++;
+		currX = 1;
+	}
+}
+
+void MatrixEnter(int** matrix, unsigned int matrix_size, MATRIX_CURSOR* Cursor, int** mirrorMatrix)
+{
+
 }
