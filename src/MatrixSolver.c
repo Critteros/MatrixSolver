@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "MatrixSolver.h"
+#include "PointerCallStack.h"
 
 
 
@@ -55,15 +56,22 @@ int main(void)
 	//DebugPrintM(matrix, matrixSize);
 	//DebugPrintM(mirrorMatrix, matrixSize);
 
-	MatrixEnter(matrix, matrixSize, &cursor, mirrorMatrix);
-	PrintMatrix(matrix, matrixSize, &cursor, mirrorMatrix);
+	//MatrixEnter(matrix, matrixSize, &cursor, mirrorMatrix);
+	//PrintMatrix(matrix, matrixSize, &cursor, mirrorMatrix);
+
+	POINTER_STACK queque;
+	createEmptyStack(&queque);
+	put(&queque, matrix);
+	int** tmp = pop(&queque);
+	printf("Matrix adress [%p]\n", matrix);
+	printf("Queque adress [%p]\n", tmp);
 	
-	
-	
+
 
 
 	deleteMatrixArray(matrix, matrixSize);
 	deleteMatrixArray(mirrorMatrix, matrixSize);
+
 	return 0;
 }
 

@@ -149,9 +149,11 @@
   <ItemGroup>
     <ClCompile Include="src\MatrixEnter.c" />
     <ClCompile Include="src\MatrixSolver.c" />
+    <ClCompile Include="src\PointerCallStack.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MatrixSolver.h" />
+    <ClInclude Include="src\PointerCallStack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
